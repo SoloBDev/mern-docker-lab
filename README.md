@@ -50,7 +50,19 @@ A robust full-stack application for managing user profiles, built specifically a
 
 This project uses Docker to manage the database infrastructure, ensuring a consistent environment.
 
-### 1. Create a Docker Network
+### Option 1: Docker Compose (Recommended)
+
+Start both MongoDB and Mongo-Express with a single command using the provided `mongo.yaml` file.
+
+```bash
+docker-compose -f mongo.yaml up -d
+```
+
+### Option 2: Manual Setup
+
+If you prefer to run containers manually, follow these steps:
+
+#### 1. Create a Docker Network
 
 Create an isolated network to allow containers to communicate securely.
 
@@ -58,7 +70,7 @@ Create an isolated network to allow containers to communicate securely.
 docker network create mern-network
 ```
 
-### 2. Start MongoDB Container
+#### 2. Start MongoDB Container
 
 Run the MongoDB container attached to the network.
 
@@ -72,7 +84,7 @@ docker run -d \
   mongo
 ```
 
-### 3. Start Mongo-Express Container
+#### 3. Start Mongo-Express Container
 
 Run Mongo-Express (Database GUI) to visualize and manage your data.
 
@@ -87,7 +99,7 @@ docker run -d \
   mongo-express
 ```
 
-### 4. Verify & Access
+### Verify & Access
 
 1. **Check Containers**: Ensure both containers are running.
 
