@@ -59,6 +59,12 @@ Start both MongoDB and Mongo-Express with a single command using the provided `m
 docker-compose -f mongo.yaml up -d
 ```
 
+To stop and remove the containers:
+
+```bash
+docker-compose -f mongo.yaml down
+```
+
 ### Option 2: Manual Setup
 
 If you prefer to run containers manually, follow these steps:
