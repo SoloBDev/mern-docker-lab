@@ -46,26 +46,81 @@ A robust full-stack application for managing user profiles, built specifically a
 └── README.md
 ```
 
+## 🐳 Docker Environment Setup
+
+This project uses Docker to manage the database infrastructure, ensuring a consistent environment.
+
+### 1. Create a Docker Network
+
+Create an isolated network to allow containers to communicate securely.
+
+```bash
+docker network create mern-network
+```
+
+### 2. Start MongoDB Container
+
+Run the MongoDB container attached to the network.
+
+```bash
+docker run -d \
+  --name mongo \
+  --network mern-network \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=12345678 \
+  mongo
+```
+
+### 3. Start Mongo-Express Container
+
+Run Mongo-Express (Database GUI) to visualize and manage your data.
+
+```bash
+docker run -d \
+  --name mongo-express \
+  --network mern-network \
+  -p 8081:8081 \
+  -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
+  -e ME_CONFIG_MONGODB_ADMINPASSWORD=12345678 \
+  -e ME_CONFIG_MONGODB_URL=mongodb://admin:12345678@mongo:27017/ \
+  mongo-express
+```
+
+### 4. Verify & Access
+
+1. **Check Containers**: Ensure both containers are running.
+
+   ```bash
+   docker ps
+   ```
+
+2. **Access Mongo-Express**: Open [http://localhost:8081](http://localhost:8081) in your browser.
+   * Login with `admin` / `12345678`.
+   * Once the application runs and seeds data, you can explore the `user_account` database here.
+
 ## 🏃‍♂️ How to Run
 
-1.  **Prerequisites**:
-    *   Node.js installed.
-    *   MongoDB running locally or accessible via connection string.
+1. **Prerequisites**:
+   * Node.js installed.
+   * MongoDB running locally or accessible via connection string.
 
-2.  **Configuration**:
-    *   Ensure the `backend/.env` file is configured with your MongoDB connection string:
-        ```env
-        PORT=5000
-        MONGO_URL=mongodb://localhost:27017/user_account
-        ```
+2. **Configuration**:
+   * Ensure the `backend/.env` file is configured with your MongoDB connection string:
 
-3.  **Start the Application**:
-    ```bash
-    cd backend
-    npm install
-    npm run dev
-    ```
+     ```env
+     PORT=5000
+     MONGO_URL=mongodb://localhost:27017/user_account
+     ```
 
-4.  **Access**:
-    *   Open your browser and navigate to `http://localhost:5000`.
-    *   The application serves the frontend statically from the backend.
+3. **Start the Application**:
+
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
+
+4. **Access**:
+   * Open your browser and navigate to `http://localhost:5000`.
+   * The application serves the frontend statically from the backend.
