@@ -43,6 +43,7 @@ A robust full-stack application for managing user profiles, built specifically a
 │   ├── config.js           # API Configuration
 │   ├── index.html          # Main view
 │   └── style.css           # Styles
+├── mongo.yaml
 └── README.md
 ```
 
